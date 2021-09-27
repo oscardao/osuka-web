@@ -1,14 +1,16 @@
 import './style.css';
+import * as ROOM from './roomBuilder.js';
 import * as THREE from 'three';
 
 let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
 
-let viewSize = 20;
+let viewSize = 10;
 let aspectRatio = window.innerWidth / window.innerHeight;
 
 initializeEnvironment();
 update();
+ROOM.construct(scene);
 
 function initializeEnvironment() {
     scene = new THREE.Scene();
@@ -25,31 +27,28 @@ function initializeEnvironment() {
     setupHemiLight();
     setupDirLight();
 
-    const geometry = new THREE.TorusGeometry(3, 1, 16, 100);
-    const material = new THREE.MeshBasicMaterial({ color: 0x5291f7 });
+    const geometry = new THREE.BoxGeometry(1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: '#5faded' });
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
+    mesh.rotation.y = Math.PI / 4;
+    //mesh.castShadow = true;
+    mesh.receiveShadow = false;
+
     scene.add(mesh);
 }
 
 function setupHemiLight() {
     let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
-    hemiLight.color.setHSL(0.6, 1, 0.6);
-    hemiLight.groundColor.setHSL(0.095, 1, 0.75);
+    hemiLight.color.setRGB(0, 170, 255);
+    hemiLight.groundColor.setRGB(170, 255, 0);
     hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
-
-    const hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 10);
-    scene.add(hemiLightHelper);
-
 }
 
 function setupDirLight() {
     const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.color.setHSL(0.1, 1, 0.95);
-    dirLight.position.set(- 1, 1.75, 1);
-    dirLight.position.multiplyScalar(30);
+    dirLight.color.setRGB(255, 255, 255);
+    dirLight.position.set(-5.630, 10.387, 7.500);
     scene.add(dirLight);
 
     dirLight.castShadow = true;
@@ -66,9 +65,6 @@ function setupDirLight() {
 
     dirLight.shadow.camera.far = 3500;
     dirLight.shadow.bias = - 0.0001;
-
-    const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 10);
-    scene.add(dirLightHelper);
 }
 
 /*------Main Update Loop------*/
