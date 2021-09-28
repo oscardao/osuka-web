@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
+import { BasisTextureLoader } from 'three/examples/jsm/loaders/BasisTextureLoader.js';
 
 const loader = new GLTFLoader();
 const fontLoader = new THREE.FontLoader();
@@ -10,8 +11,9 @@ const fontLoader = new THREE.FontLoader();
 export function construct(scene) {
     loader.load('models/osuka bedroom.glb', (gltf) => {
         console.log(gltf)
-        gltf.scene.scale.multiplyScalar(3);
-        scene.add(gltf.scene);
+        gltf.scene.castShadow = true;
+        gltf.scene.scale.multiplyScalar(2.5);
+        scene.add(gltf.scene)
     });
 
     createTitle(scene);
@@ -20,12 +22,12 @@ export function construct(scene) {
 function createTitle(scene) {
     let position = { x: 7, y: 7 };
 
-    fontLoader.load('fonts/Berlin_Regular.json', (font) => {
+    fontLoader.load('fonts/KGCorner.json', (font) => {
         const textGeometry = new THREE.TextGeometry(
             'Osuka Creative',
             {
                 font: font,
-                size: 1.5,
+                size: 1.1,
                 height: 0.02
             }
         )

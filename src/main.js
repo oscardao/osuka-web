@@ -5,7 +5,7 @@ import * as THREE from 'three';
 let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
 
-let viewSize = 35;
+let viewSize = 40;
 let aspectRatio = window.innerWidth / window.innerHeight;
 
 initializeEnvironment();
@@ -14,9 +14,10 @@ update();
 
 function initializeEnvironment() {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf7fff9);
+    scene.background = new THREE.Color(0xf2f7f4);
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+    //renderer.physicallyCorrectLights = true;
     camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000);
     camera.position.z = 10;
     camera.position.y = 10;
@@ -26,20 +27,27 @@ function initializeEnvironment() {
 
     setupHemiLight();
     setupDirLight();
+
+    const testSphere = new THREE.Mesh(
+        new THREE.SphereGeometry(3, 32, 32),
+        new THREE.MeshStandardMaterial()
+    )
+    scene.add(testSphere);
 }
 
 function setupHemiLight() {
-    let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.1);
-    hemiLight.color.setRGB(0, 170, 255);
-    hemiLight.groundColor.setRGB(170, 255, 0);
+    let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
+    hemiLight.color.setHSL(0.6, 1, 0.6);
+    hemiLight.groundColor.setHSL(0.095, 1, 0.75);
     hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 }
 
 function setupDirLight() {
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.001);
-    dirLight.color.setRGB(255, 255, 255);
-    dirLight.position.set(-5.630, 10.387, 7.500);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+    dirLight.color.setHSL(0.1, 1, 0.95);
+    dirLight.position.set(- 1, 1.75, 1);
+    dirLight.position.multiplyScalar(30);
     scene.add(dirLight);
 
     dirLight.castShadow = true;
