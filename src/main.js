@@ -5,7 +5,7 @@ import * as THREE from 'three';
 let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
 
-let viewSize = 15;
+let viewSize = 35;
 let aspectRatio = window.innerWidth / window.innerHeight;
 
 initializeEnvironment();

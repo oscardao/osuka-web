@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { Line2 } from 'three/examples/jsm/lines/Line2.js';
-import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 
 const loader = new GLTFLoader();
 const fontLoader = new THREE.FontLoader();
@@ -10,7 +10,7 @@ const fontLoader = new THREE.FontLoader();
 export function construct(scene) {
     loader.load('models/osuka bedroom.glb', (gltf) => {
         console.log(gltf)
-        gltf.scene.scale.multiplyScalar(2);
+        gltf.scene.scale.multiplyScalar(3);
         scene.add(gltf.scene);
     });
 
@@ -18,41 +18,49 @@ export function construct(scene) {
 }
 
 function createTitle(scene) {
+    let position = { x: 7, y: 7 };
+
     fontLoader.load('fonts/Berlin_Regular.json', (font) => {
         const textGeometry = new THREE.TextGeometry(
             'Osuka Creative',
             {
                 font: font,
-                size: 0.5,
+                size: 1.5,
                 height: 0.02
             }
         )
         textGeometry.center();
-        const textMaterial = new THREE.MeshBasicMaterial({ color: '#141414' });
+        const textMaterial = new THREE.MeshBasicMaterial({ color: '#3b3b3b' });
         const text = new THREE.Mesh(textGeometry, textMaterial)
         text.rotation.z = Math.PI / 4;
-        text.position.x = 2.5;
-        text.position.z = 2.5;
+        text.position.x = position.x;
+        text.position.z = position.y;
         scene.add(text)
     });
 
+    const material = new LineMaterial({
+        color: '#3b3b3b',
+        linewidth: 0.005,
+        dashed: false,
+        alphaToCoverage: true,
+    });
 
-    const material = new LineMaterial({ color: '#141414', linewidth: 2 });
-    let height = 2;
-    let width = 5;
+    let height = 5;
+    let width = 15;
     const points = [];
-    points.push(new THREE.Vector3(height / 2, 0, width / 2));
-    points.push(new THREE.Vector3(height / -2, 0, width / 2));
-    points.push(new THREE.Vector3(height / -2, 0, width / -2));
-    points.push(new THREE.Vector3(height / 2, 0, width / -2));
-    points.push(new THREE.Vector3(height / 2, 0, width / 2));
+    points.push(height / 2, 0, width / 2);
+    points.push(height / -2, 0, width / 2);
+    points.push(height / -2, 0, width / -2);
+    points.push(height / 2, 0, width / -2);
+    points.push(height / 2, 0, width / 2);
 
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    const line = new Line2(geometry, material);
-    //line.computeLineDistances();
-
+    let geometry = new LineGeometry();
+    geometry.setPositions(points);
+    let line = new Line2(geometry, material);
+    line.computeLineDistances();
+    line.scale.set(1, 1, 1);
     line.rotation.y = Math.PI / -4;
-    line.position.x = 2.5;
-    line.position.z = 2.5;
+    line.position.x = position.x;
+    line.position.z = position.y;
     scene.add(line);
 }
