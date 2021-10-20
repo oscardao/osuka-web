@@ -13,3 +13,24 @@ canvas {
 html, body {
     overflow: hidden;
 }
+
+.title {
+    position: absolute;
+    font-family: monospace;
+    margin: 2vw;
+}
+
+.title h1 {
+    font-size: 6vh;
+}
+
+.title p {
+    font-size: 3vh;
+    color: grey;
+}
+
+@media (max-width: 700px) {
+    .title p {
+        font-size: 3.5vw;
+    }
+}

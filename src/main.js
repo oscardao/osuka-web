@@ -19,25 +19,24 @@ function init() {
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
     camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000);
-    camera.position.z = 10;
-    camera.position.y = 10;
-    camera.rotation.x = Math.PI / -4;
     scene.add(camera);
+    // addOrbitControls();
+
+    camera.position.z = 10;
+    camera.position.y = 11;
+    camera.rotation.x = Math.PI / -6;
+    //controls.update();
+
     onResize();
-
     setupLighting();
-    //addOrbitControls();
-
-    //const axesHelper = new THREE.AxesHelper(5);
-    //scene.add(axesHelper);
 }
 
 function setupLighting() {
-    let hemiLight = new THREE.HemisphereLight(0xffffff, '#A2CDCD', 0.7);
+    let hemiLight = new THREE.HemisphereLight(0xffffff, '#A2CDCD', 0.6);
     hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
     dirLight.color.setHSL(0.1, 1, 0.95);
     dirLight.position.set(- 1, 1.75, 1);
     dirLight.position.multiplyScalar(30);
@@ -95,4 +94,5 @@ function onResize() {
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
 }

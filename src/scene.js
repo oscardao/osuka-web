@@ -15,11 +15,11 @@ export function construct(scene) {
 
     });
 
-    createTitle(scene);
+    //createTitle(scene);
 }
 
 function createTitle(scene) {
-    let position = { x: 7, y: 7 };
+    let position = { x: 6, y: 6 };
     const fontLoader = new THREE.FontLoader();
 
     fontLoader.load('fonts/KGCorner.json', (font) => {
