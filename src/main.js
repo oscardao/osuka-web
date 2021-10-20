@@ -1,23 +1,23 @@
 import './style.css';
-import * as ROOM from './roomBuilder.js';
+import * as SCENE from './scene.js';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-let camera, scene, renderer;
+let camera, scene, renderer, controls;
 let canvas = document.getElementById('renderCanvas');
 
-let viewSize = 40;
+let viewSize = 25;
 let aspectRatio = window.innerWidth / window.innerHeight;
 
-initializeEnvironment();
-ROOM.construct(scene);
+init();
+SCENE.construct(scene);
 update();
 
-function initializeEnvironment() {
+function init() {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf2f7f4);
+    scene.background = new THREE.Color('#defcff');
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    //renderer.physicallyCorrectLights = true;
     camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000);
     camera.position.z = 10;
     camera.position.y = 10;
@@ -25,26 +25,19 @@ function initializeEnvironment() {
     scene.add(camera);
     onResize();
 
-    setupHemiLight();
-    setupDirLight();
+    setupLighting();
+    //addOrbitControls();
 
-    const testSphere = new THREE.Mesh(
-        new THREE.SphereGeometry(3, 32, 32),
-        new THREE.MeshStandardMaterial()
-    )
-    scene.add(testSphere);
+    //const axesHelper = new THREE.AxesHelper(5);
+    //scene.add(axesHelper);
 }
 
-function setupHemiLight() {
-    let hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
-    hemiLight.color.setHSL(0.6, 1, 0.6);
-    hemiLight.groundColor.setHSL(0.095, 1, 0.75);
+function setupLighting() {
+    let hemiLight = new THREE.HemisphereLight(0xffffff, '#A2CDCD', 0.7);
     hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
-}
 
-function setupDirLight() {
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
     dirLight.color.setHSL(0.1, 1, 0.95);
     dirLight.position.set(- 1, 1.75, 1);
     dirLight.position.multiplyScalar(30);
@@ -64,6 +57,22 @@ function setupDirLight() {
 
     dirLight.shadow.camera.far = 3500;
     dirLight.shadow.bias = - 0.0001;
+}
+
+function addOrbitControls() {
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.listenToKeyEvents(window); // optional
+
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    controls.screenSpacePanning = false;
+
+    controls.minDistance = 100;
+    controls.maxDistance = 500;
+
+    controls.maxPolarAngle = Math.PI / 2;
+
 }
 
 /*------Main Update Loop------*/
