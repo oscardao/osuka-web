@@ -23,7 +23,7 @@ function init() {
     // addOrbitControls();
 
     camera.position.z = 10;
-    camera.position.y = 11;
+    camera.position.y = 10;
     camera.rotation.x = Math.PI / -6;
     //controls.update();
 
