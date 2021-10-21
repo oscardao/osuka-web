@@ -1,6 +1,7 @@
 import './style.css';
 import * as SCENE from './scene.js';
 import * as THREE from 'three';
+import * as POINTS from './points.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let camera, scene, renderer, controls;
@@ -11,6 +12,7 @@ let aspectRatio = window.innerWidth / window.innerHeight;
 
 init();
 SCENE.construct(scene);
+POINTS.init();
 update();
 
 function init() {
@@ -32,11 +34,11 @@ function init() {
 }
 
 function setupLighting() {
-    let hemiLight = new THREE.HemisphereLight(0xffffff, '#A2CDCD', 0.6);
-    hemiLight.position.set(0, 50, 0);
+    let hemiLight = new THREE.HemisphereLight("#defcff", '#636b6b', 0.9);
+    //hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
     dirLight.color.setHSL(0.1, 1, 0.95);
     dirLight.position.set(- 1, 1.75, 1);
     dirLight.position.multiplyScalar(30);

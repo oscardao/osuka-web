@@ -11,6 +11,7 @@ export function construct(scene) {
         console.log(gltf)
         gltf.scene.castShadow = true;
         gltf.scene.scale.multiplyScalar(5);
+        gltf.scene.receiveShadow = true;
         scene.add(gltf.scene)
 
     });
