@@ -11,5 +11,5 @@ let points = [
 ]
 
 export function init() {
-    //$(`#${test.htmlID}`).hide();
+    $(`#person`).hide();
 }

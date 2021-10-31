@@ -4,84 +4,56 @@
 }
 
 canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+    border-radius: 4vh;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0.2em 0.2em 20px #15162231;
 }
 
 html, body {
-    overflow: hidden;
+    background-color: #f3f2f0;
     font-family: monospace;
-}
-
-.title {
-    position: absolute;
-    margin: 2vw;
+    width: 100%;
+    height: 95%;
 }
 
 .title h1 {
     font-size: 6vh;
 }
 
-.title p {
-    font-size: 3vh;
+.title h2 {
+    font-size: 2.5vh;
     color: grey;
 }
 
-.person {
-    z-index: 10;
+.main {
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    align-content: stretch;
-    position: absolute;
-    background-color: rgb(238, 238, 238);
-    bottom: 20%;
-    width: 50vh;
-    height: 28vh;
-    left: 50%;
-    margin-left: -25vh;
-    border-radius: 2vh;
-    box-shadow: 0.4em 0.4em #212437;
+    justify-content: space-evenly;
 }
 
-.person .image {
-    width: 17vh;
-    height: 27vh;
-    background-color: black;
+.main-left {
+    width: 38%;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.person .name {
-    font-size: 4vh;
+.links {
+    padding-top: 70px;
 }
 
-.person .job {
-    font-size: 2vh;
-}
-
-.return-button {
-    position: absolute;
-    top: -3%;
-    right: -3%;
-    border-radius: 50%;
-    width: 4vh;
-    height: 4vh;
-    border: 4px solid rgb(20, 20, 20);
+.main-right {
+    width: 38%;
+    height: 45vh;
+    padding-right: 50px;
 }
 
 @media (max-width: 700px) {
     .title p {
         font-size: 3.5vw;
-    }
-    .person {
-        width: 90vw;
-        height: 58vw;
-        margin-left: -45vw;
-    }
-    .person .image {
-        width: 30vw;
-        height: 57vw;
-        background-color: black;
     }
 }

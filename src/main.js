@@ -2,13 +2,13 @@ import './style.css';
 import * as SCENE from './scene.js';
 import * as THREE from 'three';
 import * as POINTS from './points.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-let camera, scene, renderer, controls;
+let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
+let canvasDiv = document.getElementById('canvas-div');
 
-let viewSize = 25;
-let aspectRatio = window.innerWidth / window.innerHeight;
+let viewSize = 30;
+let aspectRatio = canvas.width / canvas.height;
 
 init();
 SCENE.construct(scene);
@@ -20,14 +20,12 @@ function init() {
     scene.background = new THREE.Color('#defcff');
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000);
+    camera = new THREE.OrthographicCamera(canvasDiv.width / -2, canvasDiv.width / 2, canvasDiv.height / 2, canvasDiv.height / -2, 0.1, 1000);
     scene.add(camera);
-    // addOrbitControls();
 
     camera.position.z = 10;
-    camera.position.y = 10;
+    camera.position.y = 8;
     camera.rotation.x = Math.PI / -6;
-    //controls.update();
 
     onResize();
     setupLighting();
@@ -60,22 +58,6 @@ function setupLighting() {
     dirLight.shadow.bias = - 0.0001;
 }
 
-function addOrbitControls() {
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.listenToKeyEvents(window); // optional
-
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-
-    controls.screenSpacePanning = false;
-
-    controls.minDistance = 100;
-    controls.maxDistance = 500;
-
-    controls.maxPolarAngle = Math.PI / 2;
-
-}
-
 /*------Main Update Loop------*/
 function update() {
     requestAnimationFrame(update);
@@ -87,7 +69,7 @@ window.addEventListener("resize", onResize);
 window.addEventListener("orientationchange", onResize);
 
 function onResize() {
-    aspectRatio = window.innerWidth / window.innerHeight;
+    aspectRatio = canvasDiv.width / canvasDiv.height;
 
     camera.left = (-aspectRatio * viewSize) / 2;
     camera.right = (aspectRatio * viewSize) / 2;
@@ -95,6 +77,6 @@ function onResize() {
     camera.bottom = -viewSize / 2;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(canvasDiv.width, canvasDiv.height);
     renderer.setPixelRatio(window.devicePixelRatio);
 }
