@@ -8,7 +8,11 @@ module.exports = merge(
         mode: 'production',
         plugins:
             [
-                new CleanWebpackPlugin()
+                new CleanWebpackPlugin(),
+                new webpack.ProvidePlugin({
+                    $: "jquery",
+                    jQuery: "jquery"
+                })
             ]
     }
 )

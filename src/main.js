@@ -1,7 +1,7 @@
 import './style.css';
+import * as SOCIALS from './socials.js'
 import * as SCENE from './scene.js';
 import * as THREE from 'three';
-import * as POINTS from './points.js';
 
 let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
@@ -12,7 +12,7 @@ let aspectRatio = canvas.width / canvas.height;
 
 init();
 SCENE.construct(scene);
-POINTS.init();
+SOCIALS.init();
 update();
 
 function init() {
@@ -33,7 +33,6 @@ function init() {
 
 function setupLighting() {
     let hemiLight = new THREE.HemisphereLight("#defcff", '#636b6b', 0.9);
-    //hemiLight.position.set(0, 50, 0);
     scene.add(hemiLight);
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
