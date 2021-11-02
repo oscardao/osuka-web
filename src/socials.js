@@ -25,11 +25,13 @@ let container = $('#socials');
 let defaultIconBackgroundColor = '#ffffff';
 
 export function init() {
-    let isFirst = true;
-
     socialLinks.forEach(element => {
         let button = $('<div class="socials-button"></div>');
         let icon = $('<div class="icon"></div>');
+
+        button.click(function () {
+            window.open(element.link, '_blank');
+        });
 
         button.hover(function () {
             icon.css("background-color", element.hoverColor);
@@ -44,12 +46,5 @@ export function init() {
         button.append(icon);
         button.append(span);
         container.append(button);
-        /*< div class="socials-button" >
-            <div class="icon">
-                <i class="fab fa-linkedin-f"></i>
-            </div>
-            <span>Facebook</span>
-        </div >*/
-        //container.append("<p>Hi</p>");
     });
 }

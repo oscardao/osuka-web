@@ -2,25 +2,28 @@ import './style.css';
 import * as SOCIALS from './socials.js'
 import * as SCENE from './scene.js';
 import * as THREE from 'three';
+import $ from 'jquery';
 
 let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
-let canvasDiv = document.getElementById('canvas-div');
+let canvasDiv = $('#canvas-div');
 
-let viewSize = 30;
+let viewSize = 15;
 let aspectRatio = canvas.width / canvas.height;
 
-init();
-SCENE.construct(scene);
-SOCIALS.init();
-update();
+$(document).ready(function () {
+    init();
+    SCENE.construct(scene);
+    SOCIALS.init();
+    update();
+});
 
 function init() {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color('#defcff');
+    //scene.background = new THREE.Color('#defcff');
 
-    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-    camera = new THREE.OrthographicCamera(canvasDiv.width / -2, canvasDiv.width / 2, canvasDiv.height / 2, canvasDiv.height / -2, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    camera = new THREE.OrthographicCamera(canvasDiv.width() / -2, canvasDiv.width() / 2, canvasDiv.height() / 2, canvasDiv.height() / -2, 0.1, 1000);
     scene.add(camera);
 
     camera.position.z = 10;
@@ -68,14 +71,14 @@ window.addEventListener("resize", onResize);
 window.addEventListener("orientationchange", onResize);
 
 function onResize() {
-    aspectRatio = canvasDiv.width / canvasDiv.height;
-
+    aspectRatio = canvasDiv.width() / canvasDiv.height();
+    console.log(canvasDiv.width());
     camera.left = (-aspectRatio * viewSize) / 2;
     camera.right = (aspectRatio * viewSize) / 2;
     camera.top = viewSize / 2;
     camera.bottom = -viewSize / 2;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(canvasDiv.width, canvasDiv.height);
+    renderer.setSize(canvasDiv.width(), canvasDiv.height());
     renderer.setPixelRatio(window.devicePixelRatio);
 }
