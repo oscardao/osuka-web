@@ -1,0 +1,5 @@
+let points = [
+    {
+        name: "Osuka"
+    }
+]
