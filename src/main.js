@@ -8,8 +8,8 @@ let camera, scene, renderer;
 let canvas = document.getElementById('renderCanvas');
 let canvasDiv = $('#canvas-div');
 
-let viewSize = 15;
-let aspectRatio = canvas.width / canvas.height;
+let viewSize = 25;
+let aspectRatio = window.innerWidth / window.innerHeight;
 
 $(document).ready(function () {
     init();
@@ -23,7 +23,7 @@ function init() {
     //scene.background = new THREE.Color('#defcff');
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    camera = new THREE.OrthographicCamera(canvasDiv.width() / -2, canvasDiv.width() / 2, canvasDiv.height() / 2, canvasDiv.height() / -2, 0.1, 1000);
+    camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000);
     scene.add(camera);
 
     camera.position.z = 10;
@@ -71,7 +71,7 @@ window.addEventListener("resize", onResize);
 window.addEventListener("orientationchange", onResize);
 
 function onResize() {
-    aspectRatio = canvasDiv.width() / canvasDiv.height();
+    aspectRatio = window.innerWidth / window.innerHeight;
     console.log(canvasDiv.width());
     camera.left = (-aspectRatio * viewSize) / 2;
     camera.right = (aspectRatio * viewSize) / 2;
@@ -79,6 +79,6 @@ function onResize() {
     camera.bottom = -viewSize / 2;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(canvasDiv.width(), canvasDiv.height());
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
 }
