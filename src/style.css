@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -11,17 +10,24 @@ p {
 }
 
 canvas {
-    /*border-radius: 3vh;
-    box-shadow: 0.2em 0.2em 20px #0f101831;*/
-    width: 100%;
-    height: 100%;
+    top: 0;
     position: absolute;
     z-index: -1;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
+.section {
+    width: 92vw;
+    height: 100vh;
+    padding-right: 4vw;
+    padding-left: 4vw;
+}
+
+#upper-section {
+    display: none;
+}
+
+#lower-section {
+    margin: auto 0;
 }
 
 body {
@@ -31,22 +37,14 @@ body {
     justify-content: space-between;
 }
 
-.container {
-    padding-right: 4vw;
-    padding-left: 4vw;
-}
-
 .title h1 {
     font-size: 6vh;
     font-weight: 900;
 }
 
-.title-short{
-    display: none;
-}
-
-.title-long{
+.title {
     display: block;
+    width: 30vw;
 }
 
 h2 {
@@ -56,12 +54,6 @@ h2 {
 
 .main {
     margin: auto 0;
-    width: 30vw;
-}
-
-.main-right {
-    width: 62%;
-    height: 60vh;
 }
 
 .socials {
@@ -114,7 +106,6 @@ h2 {
 
 .footer {
     font-size: 15px;
-    width: auto;
     bottom: 0;
     padding-bottom: 8px;
 }
@@ -125,21 +116,13 @@ h2 {
 }
 
 @media (max-width: 700px) {
-    .title-short{
+    #upper-section {
         display: block;
     }
-
-    .title-long{
-        display: none;
+    .title {
+        width: 60vw;
     }
-
-    .main{
-        margin: 0;
-        width: 100%;
-        padding-top: 10vh;
-    }
-
-    .socials{
+    .socials {
         display: none;
     }
 }
