@@ -7,10 +7,21 @@
 
 p {
     font-size: 2vh;
+    font-weight: 800;
+    color: rgb(98, 98, 98);
 }
 
 body {
     background-color: #f3f2f0;
+}
+
+h1 {
+    font-size: 6vh;
+    font-weight: 900;
+}
+
+h3 {
+    color: rgb(134, 134, 134);
 }
 
 #canvas-div {
@@ -33,25 +44,36 @@ body {
 }
 
 #lower-section {
-    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.title h1 {
-    font-size: 6vh;
-    font-weight: 900;
+.title-short {
+    padding-top: 7vh;
+    text-align: center;
 }
 
-.title {
+.title-short h1 {
+    font-size: 12vw;
+}
+
+.main {
+    padding-top: 20vh;
+}
+
+.description {
     display: block;
     width: 30vw;
 }
 
-h2 {
-    font-size: 2vh;
-    color: rgb(114, 114, 114);
+.alternative-title {
+    display: none;
 }
 
-.main {}
+.alternative-title h1 {
+    font-size: 4vh;
+}
 
 .socials {
     padding-top: 4em;
@@ -116,7 +138,16 @@ h2 {
     #upper-section {
         display: block;
     }
-    .title {
+    .description {
         width: 60vw;
+    }
+    .main {
+        padding-top: 10vh;
+    }
+    .alternative-title {
+        display: block;
+    }
+    .title {
+        display: none;
     }
 }
