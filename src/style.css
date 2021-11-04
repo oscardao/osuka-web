@@ -9,6 +9,10 @@ p {
     font-size: 2vh;
 }
 
+body {
+    background-color: #f3f2f0;
+}
+
 #canvas-div {
     top: 0;
     position: absolute;
