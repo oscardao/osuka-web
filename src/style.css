@@ -15,12 +15,17 @@ body {
     background-color: #f3f2f0;
 }
 
+html {
+    scroll-snap-type: y mandatory;
+}
+
 h1 {
     font-size: 6vh;
     font-weight: 900;
 }
 
 h3 {
+    font-size: 3vh;
     color: rgb(134, 134, 134);
 }
 
@@ -32,11 +37,16 @@ h3 {
     height: 100vh;
 }
 
+/*.section-container {
+    scroll-snap-type: y mandatory;
+}*/
+
 .section {
     width: 92vw;
     height: 100vh;
     padding-right: 4vw;
     padding-left: 4vw;
+    scroll-snap-align: start;
 }
 
 #upper-section {
@@ -55,7 +65,7 @@ h3 {
 }
 
 .title-short h1 {
-    font-size: 12vw;
+    font-size: 11vw;
 }
 
 .main {
