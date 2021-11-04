@@ -23,7 +23,7 @@ function init() {
     //scene.background = new THREE.Color('#defcff');
 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    camera = new THREE.OrthographicCamera(window.innerWidth / -2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / -2, 0.1, 1000);
+    camera = new THREE.OrthographicCamera(canvasDiv.width() / -2, canvasDiv.width() / 2, canvasDiv.height / 2, canvasDiv.Height / -2, 0.1, 1000);
     scene.add(camera);
 
     camera.position.z = 10;
@@ -71,14 +71,14 @@ window.addEventListener("resize", onResize);
 window.addEventListener("orientationchange", onResize);
 
 function onResize() {
-    aspectRatio = window.innerWidth / window.innerHeight;
-    console.log(canvasDiv.width());
+    aspectRatio = canvasDiv.width() / canvasDiv.height();
+
     camera.left = (-aspectRatio * viewSize) / 2;
     camera.right = (aspectRatio * viewSize) / 2;
     camera.top = viewSize / 2;
     camera.bottom = -viewSize / 2;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(canvasDiv.width(), canvasDiv.height());
     renderer.setPixelRatio(window.devicePixelRatio);
 }
