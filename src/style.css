@@ -7,7 +7,7 @@
 
 p {
     font-size: 2vh;
-    font-weight: 800;
+    font-weight: 600;
     color: rgb(98, 98, 98);
 }
 
@@ -27,6 +27,18 @@ h1 {
 h3 {
     font-size: 3vh;
     color: rgb(134, 134, 134);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1vh 4vw 0vw;
+    width: 100%;
+}
+
+header p {
+    color: black;
 }
 
 #canvas-div {
@@ -65,7 +77,7 @@ h3 {
 }
 
 .title-short h1 {
-    font-size: 11vw;
+    font-size: 10vw;
 }
 
 .main {
